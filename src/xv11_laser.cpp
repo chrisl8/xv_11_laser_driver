@@ -127,7 +127,7 @@ namespace xv_11_laser_driver {
 	    scan->angle_min = 0.0;
 	    scan->angle_max = 2.0*M_PI;
 	    scan->angle_increment = (2.0*M_PI/360.0);
-	    scan->range_min = 0.06;
+	    scan->range_min = 0.2;
 	    scan->range_max = 5.0;
 	    scan->ranges.resize(360);
 	    scan->intensities.resize(360);
@@ -151,6 +151,13 @@ namespace xv_11_laser_driver {
 		  // uint8_t flag2 = (byte1 & 0x40) >> 6;  // Object too close, possible poor reading due to proximity kicks in at < 0.6m
 		  // Remaining bits are the range in mm
 		  uint16_t range = ((byte1 & 0x3F)<< 8) + byte0;
+          // Scrub long and short values to allow local planner
+          // to use them to clear obstacles after they are gone.
+          if(range > 5000) {
+              range = 4900;
+          } else if(range < 200) {
+              range = 4900;
+          }
 		  // Last two bytes represent the uncertanty or intensity, might also be pixel area of target...
 		  uint16_t intensity = (byte3 << 8) + byte2;
 
