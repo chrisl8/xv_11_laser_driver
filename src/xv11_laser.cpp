@@ -75,7 +75,7 @@ namespace xv_11_laser_driver {
 
 	    scan->angle_min = 0.0;
 	    scan->angle_max = 2.0*M_PI;
-	    scan->angle_increment = (2.0*M_PI/360.0);
+	    scan->angle_increment = (2.0*M_PI/359.0);
 	    scan->time_increment = motor_speed_/1e8;
 	    scan->range_min = 0.06;
 	    scan->range_max = 5.0;
@@ -126,7 +126,7 @@ namespace xv_11_laser_driver {
 
 	    scan->angle_min = 0.0;
 	    scan->angle_max = 2.0*M_PI;
-	    scan->angle_increment = (2.0*M_PI/360.0);
+	    scan->angle_increment = (2.0*M_PI/359.0);
 	    scan->range_min = 0.2;
 	    scan->range_max = 5.0;
 	    scan->ranges.resize(360);
